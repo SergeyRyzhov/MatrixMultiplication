@@ -11,6 +11,8 @@ int main (int argc, char** argv)
     double time;
 
     int numThreads = 0;
+    
+    int maxPrintSize = 10;
 
     int commonSize = 1000;
 
@@ -33,26 +35,41 @@ int main (int argc, char** argv)
         commonSize = atoi(argv[2]);
     }
 
+    if(argc > 3)
+    {
+        maxPrintSize = atoi(argv[3]);
+    }
+
     n = commonSize;
     m = commonSize;
     k = commonSize;
 
     a = NewMtx(n, m);
     b = NewMtx(m, k);
+    c = NewMtx(n, k);
     
-    InitMtx(a,1);    
-    InitMtx(b,1);
+    InitMtx(a, 1.0);    
+    InitMtx(b, 1.0);
     
-    PrintMtx(a, "a");
-    PrintMtx(b, "b");
+    PrintMtxWithSize(a, "a", maxPrintSize);
+    PrintMtxWithSize(b, "b", maxPrintSize);
 
     time = omp_get_wtime();
-    c = Multiplication(a,b);
+    c = Sum(a,b,c);
     time = omp_get_wtime() - time;
-
-    printf("%f \n", time);
-
-    PrintMtx(c, "c");
+    printf("Sum %f \n", time);    
+    
+    time = omp_get_wtime();
+    c = Multiplication(a,b,c);
+    time = omp_get_wtime() - time;
+    printf("Multiplication %f \n", time);
+    
+    //time = omp_get_wtime();
+    //c = BlockMultiplication(a,b,c);
+    //time = omp_get_wtime() - time;
+    //printf("Block multiplication %f \n", time);
+    
+    PrintMtxWithSize(c, "c", maxPrintSize);
 
     FreeMtx(a);
     FreeMtx(b);

@@ -1,8 +1,9 @@
 #ifndef MTX_H
 #define MTX_H
 
+#define mtxtype long
 
-#define mtxtype int
+//#define SUM(a,b) a + b
 
 typedef struct
 {
@@ -13,13 +14,19 @@ typedef struct
 
 Matrix* NewMtx(int rows, int cols);
 
-void InitMtx(Matrix* mtx, int fillConstant);
+void InitMtx(Matrix* mtx, mtxtype fillConstant);
 
-Matrix* Multiplication(Matrix* a, Matrix* b);
+Matrix* Sum(Matrix* a, Matrix* b, Matrix* c);
+
+Matrix* Multiplication(Matrix* a, Matrix* b, Matrix* c);
+
+Matrix* BlockMultiplication(Matrix* a, Matrix* b, Matrix* c);
 
 void FreeMtx(Matrix* mtx);
 
 void PrintMtx(Matrix* mtx, char* name);
+
+void PrintMtxWithSize(Matrix* mtx, char* name, int maxSize);
 
 void Transposition(Matrix* mtx);
 
