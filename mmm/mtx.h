@@ -1,7 +1,7 @@
 #ifndef MTX_H
 #define MTX_H
 
-#define mtxtype long
+#define mtxtype int
 
 //#define SUM(a,b) a + b
 

@@ -178,13 +178,13 @@ Matrix* Multiplication(Matrix* a, Matrix* b, Matrix* c)
     cData = c->data;
 
     Transposition(b);
-
 #pragma omp parallel for
     for(i = 0; i < n; i++)
     {
         for(k = 0; k < p; k++)
         {
             register int result = 0;
+//#pragma omp parallel for reduction(+:result)
             for(j = 0; j < m; j++)
             {
                 result += aData[i][j] * bData[k][j];
