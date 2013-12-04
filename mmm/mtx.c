@@ -185,6 +185,7 @@ Matrix* Multiplication(Matrix* a, Matrix* b, Matrix* c)
         {
             register int result = 0;
 //#pragma omp parallel for reduction(+:result)
+#pragma simd
             for(j = 0; j < m; j++)
             {
                 result += aData[i][j] * bData[k][j];
